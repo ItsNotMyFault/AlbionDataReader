@@ -1,10 +1,6 @@
 ﻿using Albion.Network;
-using GankCompanionDataReader.eventHandler;
 using GankCompanionDataReader.eventHandler.party;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace albion_data_reader_new.handlers
@@ -20,6 +16,7 @@ namespace albion_data_reader_new.handlers
         };
         public PartyEventHandler(PartyApiService partyApiService) : base(evetnCodes)
         {
+            //
             this.partyApiService = partyApiService;
         }
 

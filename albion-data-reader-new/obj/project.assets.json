@@ -261,11 +261,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DeveloppmentProjects\\albion-data-reader-new\\albion-data-reader-new\\albion-data-reader-new.csproj",
+      "projectUniqueName": "D:\\DeveloppmentProjects\\albion-data-reader-2.0\\albion-data-reader-new\\albion-data-reader-new.csproj",
       "projectName": "albion-data-reader-new",
-      "projectPath": "D:\\DeveloppmentProjects\\albion-data-reader-new\\albion-data-reader-new\\albion-data-reader-new.csproj",
+      "projectPath": "D:\\DeveloppmentProjects\\albion-data-reader-2.0\\albion-data-reader-new\\albion-data-reader-new.csproj",
       "packagesPath": "C:\\Users\\Alexi\\.nuget\\packages\\",
-      "outputPath": "D:\\DeveloppmentProjects\\albion-data-reader-new\\albion-data-reader-new\\obj\\",
+      "outputPath": "D:\\DeveloppmentProjects\\albion-data-reader-2.0\\albion-data-reader-new\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Alexi\\AppData\\Roaming\\NuGet\\NuGet.Config",
