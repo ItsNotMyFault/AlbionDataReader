@@ -2,6 +2,7 @@
 using Albion.Network.Example;
 using albion_data_reader_new;
 using albion_data_reader_new.handlers;
+using albion_data_reader_new.handlers.market;
 using GankCompanionDataReader.eventHandler;
 using GankCompanionDataReader.eventHandler.party;
 using PacketDotNet;
@@ -27,12 +28,10 @@ namespace GankCompanionDataReader.packethandler
             ReceiverBuilder builder = ReceiverBuilder.Create();
 
 
-            //builder.AddRequestHandler(new MoveEventHandler());
             builder.AddEventHandler(new MoveEventHandler());
-            builder.AddEventHandler(new FameEventHandler());
             builder.AddEventHandler(new PartyEventHandler(partyApiService));
+            //add request instead of event?!?!!?
             receiver = builder.Build();
-            //builder.AddEventHandler(new NewCharacterEventHandler());
 
             Console.WriteLine("Start");
 
@@ -59,7 +58,12 @@ namespace GankCompanionDataReader.packethandler
             UdpPacket packet = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data).Extract<UdpPacket>();
             if (packet != null && (packet.SourcePort == 5056 || packet.DestinationPort == 5056))
             {
-                receiver.ReceivePacket(packet.PayloadData);
+                try
+                {
+                    receiver.ReceivePacket(packet.PayloadData);
+                }
+                catch (Exception) { }
+
             }
         }
 

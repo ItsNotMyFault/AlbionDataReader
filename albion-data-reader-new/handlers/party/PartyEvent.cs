@@ -12,29 +12,28 @@ namespace albion_data_reader_new.handlers
         public PartyLeftEvent partyLeftEvent;
         public PartyEvent(Dictionary<byte, object> parameters) : base(parameters)
         {
-            //try
-            //{
-            parameters.TryGetValue(252, out object eventCodeInt);
-            EventCodes eventCode = (EventCodes)int.Parse(eventCodeInt.ToString());
-            
+            try
+            {
+                EventCodes eventCode = Common.ParseEventCode(parameters);
 
-            if (eventCode == EventCodes.evPartyCreated)
-            {
-                InitPartyCreateEvent(parameters);
+                if (eventCode == EventCodes.evPartyCreated)
+                {
+                    InitPartyCreateEvent(parameters);
+                }
+                else if (eventCode == EventCodes.evPartyPlayerJoined)
+                {
+                    InitPartyJoinEvent(parameters);
+                }
+                else if (eventCode == EventCodes.evPartyPlayerLeft)
+                {
+                    InitPartyLeftEvent(parameters);
+                }
+                Console.WriteLine($"PartyEvent => {eventCode} with parameter count : {parameters.Count}");
             }
-            else if (eventCode == EventCodes.evPartyPlayerJoined)
+            catch (Exception e)
             {
-                InitPartyJoinEvent(parameters);
+                Console.WriteLine($"EXCEPTION PARTY MANAGER => {e.Message}");
             }
-            else if (eventCode == EventCodes.evPartyPlayerLeft)
-            {
-                InitPartyLeftEvent(parameters);
-            }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine($"EXCEPTION PARTY MANAGER => {e.Message}");
-            //}
 
         }
 
@@ -88,6 +87,10 @@ namespace albion_data_reader_new.handlers
             else if (parameters.Count == 2)//set party as closed
             {
                 //this.partyService.PlayerCloseParty();
+                this.partyLeftEvent = new PartyLeftEvent()
+                {
+                    IsPartyClosed = true
+                };
             }
             else if (parameters.Count == 3)//specific player left party.
             {
@@ -95,7 +98,8 @@ namespace albion_data_reader_new.handlers
                 parameters.TryGetValue(1, out partyMemberByteArray);
                 this.partyLeftEvent = new PartyLeftEvent()
                 {
-                    PlayerLeftId = partyMemberByteArray
+                    PlayerLeftId = partyMemberByteArray,
+                    IsPartyClosed = false
                 };
             }
         }

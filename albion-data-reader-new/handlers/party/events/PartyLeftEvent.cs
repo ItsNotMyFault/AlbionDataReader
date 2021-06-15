@@ -10,5 +10,6 @@ namespace albion_data_reader_new.handlers
     {
         public string PartyId { get; set; }
         public string PlayerLeftId { get; set; }
+        public bool IsPartyClosed{ get; set; }
     }
 }

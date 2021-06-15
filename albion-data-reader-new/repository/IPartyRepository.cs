@@ -7,8 +7,8 @@ namespace GankCompanionDataReader.eventHandler
     public interface IPartyRepository
     {
 
-        string GetPartyIDString();
-        Guid GetPartyID();
+        string GetPartyID();
         void SetPartyID(string partyId);
+        
     }
 }

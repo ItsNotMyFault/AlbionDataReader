@@ -9,14 +9,13 @@ namespace albion_data_reader_new.handlers
     {
         private readonly PartyApiService partyApiService;
 
-        private static readonly List<int> evetnCodes = new List<int>() {
+        private static readonly List<int> eventCodes = new List<int>() {
             (int)EventCodes.evPartyPlayerJoined,
             (int)EventCodes.evPartyCreated,
             (int)EventCodes.evPartyPlayerLeft
         };
-        public PartyEventHandler(PartyApiService partyApiService) : base(evetnCodes)
+        public PartyEventHandler(PartyApiService partyApiService) : base(eventCodes)
         {
-            //
             this.partyApiService = partyApiService;
         }
 
@@ -34,7 +33,16 @@ namespace albion_data_reader_new.handlers
             } else if (value.partyLeftEvent != null)
             {
                 PartyLeftEvent partyLeftEvent = value.partyLeftEvent;
-                this.partyApiService.PlayerLeaveParty(partyLeftEvent);
+                if (value.partyLeftEvent.IsPartyClosed)
+                {
+                    this.partyApiService.CloseParty();
+                }
+                else
+                {
+                  
+                    this.partyApiService.PlayerLeaveParty(partyLeftEvent);
+                }
+         
             }
             await Task.CompletedTask;
         }

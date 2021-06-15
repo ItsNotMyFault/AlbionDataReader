@@ -5,26 +5,20 @@ namespace GankCompanionDataReader.infrastructure
 {
     public class InMemoryPartyRepository : IPartyRepository
     {
-        private Guid partyId;
+        //private Guid partyId;
+        private string partyId;
         public InMemoryPartyRepository()
         {
-            this.partyId = Guid.NewGuid();
-            
         }
 
-        public Guid GetPartyID()
+        public string GetPartyID()
         {
             return this.partyId;
         }
 
-        public string GetPartyIDString()
-        {
-            return this.partyId.ToString();
-        }
-
         public void SetPartyID(string partyId)
         {
-            this.partyId = new Guid(partyId);
+            this.partyId = partyId;
         }
     }
 }

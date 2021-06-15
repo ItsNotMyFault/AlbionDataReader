@@ -1,4 +1,5 @@
 ﻿using albion_data_reader_new.handlers;
+using albion_data_reader_new.handlers.party.events;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -69,8 +70,6 @@ namespace GankCompanionDataReader.eventHandler.party
         public void CreateParty(PartyCreateEvent partyCreateEvent)
         {
 
-            string partyId = Guid.NewGuid().ToString();
-            this.partyRepository.SetPartyID(partyId);
             string json2 = JsonConvert.SerializeObject(partyCreateEvent);
 
             StringContent content = new StringContent(json2, Encoding.UTF8, "application/json");
@@ -91,7 +90,8 @@ namespace GankCompanionDataReader.eventHandler.party
             }
 
             string responseString = response.Content.ReadAsStringAsync().Result;
-            Object accessTokenResponse = JsonConvert.DeserializeObject<Object>(responseString);
+            string partyId = JsonConvert.DeserializeObject<string>(responseString);
+            partyRepository.SetPartyID(partyId);
             var test = 0;
         }
 
@@ -121,11 +121,21 @@ namespace GankCompanionDataReader.eventHandler.party
             Object accessTokenResponse = JsonConvert.DeserializeObject<Object>(responseString);
         }
 
-        public void PlayerCloseParty()
+        public void CloseParty()
         {
-            string PartyId = partyRepository.GetPartyIDString();
+            string partyId = partyRepository.GetPartyID();
 
-            string json2 = JsonConvert.SerializeObject(PartyId);
+            if (String.IsNullOrEmpty(partyId))
+            {
+                throw new ArgumentException("PartyId not found");
+            }
+
+            PartyCloseEvent partyCloseEvent = new PartyCloseEvent()
+            {
+                PartyId = partyId
+            };
+
+            string json2 = JsonConvert.SerializeObject(partyCloseEvent);
 
             StringContent content = new StringContent(json2, Encoding.UTF8, "application/json");
             this.httpClient = new HttpClient();

@@ -26,7 +26,8 @@ namespace Albion.Network
                 Parameters.Add(252, EventCodes.evMove);
             }
 
-            short eventCode = ParseEventCode(Parameters);
+            short eventCode = (short)Common.ParseEventCode(Parameters);
+            
             var eventPacket = new EventPacket(eventCode, Parameters);
 
             _ = handlers.HandleAsync(eventPacket);
@@ -56,25 +57,6 @@ namespace Albion.Network
             }
 
             return (short)value;
-        }
-
-        private short ParseEventCode(Dictionary<byte, object> parameters)
-        {
-            if (!parameters.TryGetValue(252, out object value))
-            {
-                throw new InvalidOperationException();
-            }
-            try
-            {
-                short code = (short)value;
-                EventCodes test = (EventCodes)code;
-                Console.WriteLine($"Event... {test}");
-                return code;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
         }
     }
 }
