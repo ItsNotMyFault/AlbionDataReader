@@ -3,6 +3,8 @@ using Albion.Network.Example;
 using albion_data_reader_new;
 using albion_data_reader_new.handlers;
 using albion_data_reader_new.handlers.market;
+using albion_data_reader_new.handlers.requests;
+using albion_data_reader_new.handlers.responses;
 using GankCompanionDataReader.eventHandler;
 using GankCompanionDataReader.eventHandler.party;
 using PacketDotNet;
@@ -23,19 +25,19 @@ namespace GankCompanionDataReader.packethandler
 
         public void Start()
         {
-
-
             ReceiverBuilder builder = ReceiverBuilder.Create();
-
-
-            builder.AddEventHandler(new MoveEventHandler());
-            builder.AddEventHandler(new PartyEventHandler(partyApiService));
+            //builder.AddEventHandler(new MoveEventHandler());
+            //builder.AddEventHandler(new PartyEventHandler(partyApiService));
+            builder.AddEventHandler(new AllEventHandler());
+            builder.AddRequestHandler(new AllRequestsHandler(0));
+            builder.AddResponseHandler(new AllResponseHandler(0));
+            //builder.AddEventHandler(new MarketEventHandler(null));
             //add request instead of event?!?!!?
             receiver = builder.Build();
 
             Console.WriteLine("Start");
 
-            CaptureDeviceList devices = CaptureDeviceList.Instance;
+            CaptureDeviceList devices = CaptureDeviceList.Instance;//uses winpcap
             foreach (var device in devices)
             {
                 new Thread(() =>

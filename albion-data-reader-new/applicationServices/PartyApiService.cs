@@ -12,6 +12,7 @@ namespace GankCompanionDataReader.eventHandler.party
     {
         private HttpClient httpClient;
         private readonly string URL = "https://localhost:44331/Party";
+        //private readonly string URL = "https://gankcompanion.azurewebsites.net/Party";
         private readonly IPartyRepository partyRepository;
         public PartyApiService(IPartyRepository partyRepository)
         {
@@ -19,13 +20,13 @@ namespace GankCompanionDataReader.eventHandler.party
             httpClient = new HttpClient();
         }
 
-        public void PlayerJoinParty(PartyJoinEvent partyJoinEvent)
+        public void PlayerJoinParty(JoinPartyRequest partyJoinEvent)
         {
-            partyJoinEvent.PlayerJoinedId = partyRepository.GetPartyID().ToString();
+            partyJoinEvent.PartyId = partyRepository.GetPartyID().ToString();
 
             string json2 = JsonConvert.SerializeObject(partyJoinEvent);
 
-            StringContent content = new StringContent(json2, Encoding.UTF8, "application/json");
+            StringContent content = new(json2, Encoding.UTF8, "application/json");
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.Add("contentType", "application/json");
             this.httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
@@ -67,12 +68,12 @@ namespace GankCompanionDataReader.eventHandler.party
             return result;
         }
 
-        public void CreateParty(PartyCreateEvent partyCreateEvent)
+        public void CreateParty(CreatePartyRequest partyCreateEvent)
         {
 
             string json2 = JsonConvert.SerializeObject(partyCreateEvent);
 
-            StringContent content = new StringContent(json2, Encoding.UTF8, "application/json");
+            StringContent content = new(json2, Encoding.UTF8, "application/json");
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.Add("contentType", "application/json");
             this.httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
@@ -86,7 +87,7 @@ namespace GankCompanionDataReader.eventHandler.party
             }
             catch (Exception e)
             {
-                var ff = e;
+                Console.WriteLine($"Error when addind to party => {e.Message}");
             }
 
             string responseString = response.Content.ReadAsStringAsync().Result;
@@ -95,12 +96,12 @@ namespace GankCompanionDataReader.eventHandler.party
             var test = 0;
         }
 
-        public void PlayerLeaveParty(PartyLeftEvent partyLeftEvent)
+        public void PlayerLeaveParty(LeavePartyRequest partyLeftEvent)
         {
             partyLeftEvent.PartyId = partyRepository.GetPartyID().ToString();
             string json2 = JsonConvert.SerializeObject(partyLeftEvent);
 
-            StringContent content = new StringContent(json2, Encoding.UTF8, "application/json");
+            StringContent content = new(json2, Encoding.UTF8, "application/json");
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.Add("contentType", "application/json");
             this.httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
@@ -115,7 +116,7 @@ namespace GankCompanionDataReader.eventHandler.party
             }
             catch (Exception e)
             {
-                var ff = e;
+                Console.WriteLine($"Error when player leave the party => {e.Message}");
             }
             string responseString = response.Content.ReadAsStringAsync().Result;
             Object accessTokenResponse = JsonConvert.DeserializeObject<Object>(responseString);
@@ -152,7 +153,7 @@ namespace GankCompanionDataReader.eventHandler.party
             }
             catch (Exception e)
             {
-                var ff = e;
+                Console.WriteLine($"Error when closing the party => {e.Message}");
             }
             string responseString = response.Content.ReadAsStringAsync().Result;
             Object accessTokenResponse = JsonConvert.DeserializeObject<Object>(responseString);

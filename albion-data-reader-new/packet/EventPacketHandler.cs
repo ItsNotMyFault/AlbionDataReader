@@ -9,7 +9,7 @@ namespace Albion.Network
     {
         private readonly int eventCode;
         private readonly List<int> eventCodes;
-        private List<int> eventCodesToIgnore;
+        protected List<int> eventCodesToIgnore;
 
         public EventPacketHandler(int eventCode)
         {
@@ -27,82 +27,66 @@ namespace Albion.Network
 
         protected internal override Task OnHandleAsync(EventPacket packet)
         {
-            EventCodes anEventZonetrhoughMap = (EventCodes)packet.EventCode;
-            if (EventCodes.evPlayerZoneInTheMap == anEventZonetrhoughMap
-                || EventCodes.evZonethroughNewZone == anEventZonetrhoughMap)
-            {
-                if (packet.Parameters.Count > 6)
-                {
-                    Console.WriteLine($"SOMEONE ZONED IN THE MAP, count =  {packet.Parameters.Count}");
-                }
 
-            }
             if (eventCodesToIgnore.Contains(packet.EventCode))
             {
                 return NextAsync(packet);
             }
             if (eventCodes != null && eventCodes.Count > 0)
             {
+                EventCodes currentEventName = (EventCodes)packet.EventCode;
                 if (eventCodes.Contains(packet.EventCode))
                 {
                     TEvent instance = (TEvent)Activator.CreateInstance(typeof(TEvent), packet.Parameters);
-
                     return OnActionAsync(instance);
                 }
-            }
-            if (eventCode != packet.EventCode)
-            {
-                EventCodes eventCodes = (EventCodes)packet.EventCode;
-                //Console.WriteLine($"Unregisteered Event => {eventCodes} with parameter count : {packet.Parameters.Count}");
-                return NextAsync(packet);
+                return NextAsync(packet);//skip the event
             }
             else
             {
-                TEvent instance = (TEvent)Activator.CreateInstance(typeof(TEvent), packet.Parameters);
-
-                return OnActionAsync(instance);
+                TEvent allInstance = (TEvent)Activator.CreateInstance(typeof(TEvent), packet.Parameters);
+                return OnActionAsync(allInstance);//log the event and more
             }
         }
 
         private void SetEventCodesToIgnore()
         {
-            List<int> eventsToIgnore = new List<int>() {
+            List<int> eventsToIgnore = new()
+            {
                 0,
-                (int) EventCodes.evPlayerZoneInTheMap,
-                (int) EventCodes.evMove,
-                (int) EventCodes.evMove3,
-                (int) EventCodes.evevLeave,
-                (int) EventCodes.evUnknown,
-                (int) EventCodes.evUnknown2,
-                (int) EventCodes.evUnknown3,
-                (int) EventCodes.evPlayerGetonline,
-                (int) EventCodes.evUpdateFame,
-                (int) EventCodes.evZonethroughNewZone,
-                (int) EventCodes.evPartyFinderUpdate,
-                (int) EventCodes.evUnknown4,
-                (int) EventCodes.evNewEquipmentItem,
-                (int) EventCodes.evSiegeCampClaimStart,
-                (int) EventCodes.evSiegeCampClaimCancel,
-                (int) EventCodes.evOtherGrabbedLoot,
-                (int) EventCodes.evActionOnBuildingStart,
-                (int) EventCodes.evPremiumChanged,
-                (int) EventCodes.evDurabilityChanged,
-                (int) EventCodes.evAccessStatus,
-                (int) EventCodes.evRegenerationEnergyChanged,
-                (int) EventCodes.evUpdateChatSettings,
-                (int) EventCodes.evStopsMoving,       //fightingevents below
-                (int) EventCodes.evCastHit,
-                (int) EventCodes.evExitEnterCancel,
-                (int) EventCodes.evActiveSpellEffectsUpdate,
-                (int) EventCodes.evCastHits,
-                (int) EventCodes.evCastSpell,
-                (int) EventCodes.evCastSpell2,
-                (int) EventCodes.evEnergyUpdate,
-                (int) EventCodes.evChannelingEnded,
-                (int) EventCodes.evDamageShieldUpdate,
-                (int) EventCodes.evCharacterStatsDeathHistory,
-                (int) EventCodes.evCastStart,
-                (int) EventCodes.evRegenerationHealthChanged,
+                (int)EventCodes.evMove,
+                (int)EventCodes.evMove3,
+                (int)EventCodes.evevLeave,
+                (int)EventCodes.evPlayerLogsIn,
+                (int)EventCodes.evUnknown2,
+                (int)EventCodes.evUnknown3,
+                (int)EventCodes.evPlayerGetonline,
+                (int)EventCodes.evUpdateFame,
+                (int)EventCodes.evPartyFinderUpdate,
+                (int)EventCodes.evUnknown4,
+                (int)EventCodes.evStackingItem,
+                (int)EventCodes.evSiegeCampClaimStart,
+                (int)EventCodes.evSiegeCampClaimCancel,
+                (int)EventCodes.evOtherGrabbedLoot,
+                (int)EventCodes.evGatherFinished,
+                (int)EventCodes.evPremiumChanged,
+                (int)EventCodes.evDurabilityChanged,
+                (int)EventCodes.evAccessStatus,
+                (int)EventCodes.evRegenerationEnergyChanged,
+                (int)EventCodes.evUpdateChatSettings,
+                (int)EventCodes.evStopsMoving,       //fightingevents below
+                (int)EventCodes.evCastHit,
+                (int)EventCodes.evExitEnterCancel,
+                (int)EventCodes.evActiveSpellEffectsUpdate,
+                (int)EventCodes.evCastHits,
+                (int)EventCodes.evCastSpell,
+                (int)EventCodes.evCastSpell2,
+                (int)EventCodes.evEnergyUpdate,
+                (int)EventCodes.evChannelingEnded,
+                (int)EventCodes.evDamageShieldUpdate,
+                (int)EventCodes.evCharacterStatsDeathHistory,
+                (int)EventCodes.evCastStart,
+                (int)EventCodes.evRegenerationHealthChanged,
             };
             this.eventCodesToIgnore = eventsToIgnore;
         }

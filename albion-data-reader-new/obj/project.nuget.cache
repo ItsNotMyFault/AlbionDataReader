@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "b1erJVSaXwxMgeubvd/3bZrtNxqrehQYcqBagP0m51npvVm/9QhraVfmnoXMDP9o86tgF4Rxzt8/j/bQVkW7+Q==",
+  "success": true,
+  "projectFilePath": "D:\\DeveloppmentProjects\\albion-data-reader-2.0\\albion-data-reader-new\\albion-data-reader-new.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\packetdotnet\\1.1.1\\packetdotnet.1.1.1.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\photonpackageparser\\4.1.0\\photonpackageparser.4.1.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\sharppcap\\5.3.0\\sharppcap.5.3.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.0\\system.runtime.compilerservices.unsafe.4.7.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.15\\microsoft.netcore.app.host.win-x64.5.0.15.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Alexi\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

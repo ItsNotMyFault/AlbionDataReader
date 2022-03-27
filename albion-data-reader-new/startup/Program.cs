@@ -13,12 +13,12 @@ namespace albion_data_reader_new
     {
         private static void Main(string[] args)
         {
-            ServiceProvider serviceProvider = GetSErviceProvider();
-            PacketReader packetReader = new PacketReader(serviceProvider.GetService<PartyApiService>());
+            ServiceProvider serviceProvider = GetServiceProvider();
+            PacketReader packetReader = new(serviceProvider.GetService<PartyApiService>());
             packetReader.Start();
         }
 
-        private static ServiceProvider GetSErviceProvider()
+        private static ServiceProvider GetServiceProvider()
         {
             ServiceProvider serviceProvider = new ServiceCollection()
               .AddSingleton<IPartyRepository, InMemoryPartyRepository>().AddTransient<PartyApiService>().BuildServiceProvider();

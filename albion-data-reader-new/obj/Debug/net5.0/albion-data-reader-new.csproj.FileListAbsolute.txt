@@ -27,7 +27,6 @@ D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\albion-data-reader-new.runtimeconfig.json
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\albion-data-reader-new.runtimeconfig.dev.json
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\albion-data-reader-new.dll
-D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\ref\albion-data-reader-new.dll
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\albion-data-reader-new.pdb
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -46,3 +45,4 @@ D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\obj\Debug\
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\obj\Debug\net5.0\ref\albion-data-reader-new.dll
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\obj\Debug\net5.0\albion-data-reader-new.pdb
 D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\obj\Debug\net5.0\albion-data-reader-new.genruntimeconfig.cache
+D:\DeveloppmentProjects\albion-data-reader-2.0\albion-data-reader-new\obj\Debug\net5.0\refint\albion-data-reader-new.dll
