@@ -19,8 +19,8 @@ namespace albion_data_reader_new.handlers.requests
 
         private static OperationCodes ParseEventCode(Dictionary<int, object> parameters)
         {
-            if (!parameters.TryGetValue(308, out object value))
-            //if (!parameters.TryGetValue(252, out object value))
+            if (!parameters.TryGetValue(253, out object value))
+            //if (!parameters.TryGetValue(308, out object value))
             {
                 throw new InvalidOperationException();
             }

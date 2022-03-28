@@ -13,11 +13,12 @@ namespace albion_data_reader_new.handlers.requests
         {
             try
             {
-                Console.WriteLine($"AllOperation => with parameter count : {parameters.Count}");
+                int codeNumber = (int)this.operationCode;
+                Console.WriteLine($"AllOperation => ({codeNumber}) {this.operationCode} with parameter count : {parameters.Count}");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"EXCEPTION PARTY MANAGER => {e.Message}");
+                Console.WriteLine($"EXCEPTION AllOperation => {e.Message}");
             }
 
         }

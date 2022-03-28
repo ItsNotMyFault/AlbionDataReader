@@ -16,7 +16,7 @@ namespace albion_data_reader_new.handlers
             }
             catch (Exception e)
             {
-                Console.WriteLine($"EXCEPTION PARTY MANAGER => {e.Message}");
+                Console.WriteLine($"EXCEPTION AllEvent => {e.Message}");
             }
 
         }

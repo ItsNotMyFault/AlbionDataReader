@@ -27,7 +27,8 @@ namespace Albion.Network
             TOperation instance = null;
             try
             {
-                instance = (TOperation)Activator.CreateInstance(typeof(TOperation), packet.Parameters);
+                Dictionary<int, object> newParameters = ConvertParameters(packet.Parameters);
+                instance = (TOperation)Activator.CreateInstance(typeof(TOperation), newParameters);
             }
             catch (Exception ex)
             {
@@ -35,7 +36,19 @@ namespace Albion.Network
             }
 
             return OnActionAsync(instance);
-      
+
+        }
+
+        private Dictionary<int, object> ConvertParameters(Dictionary<byte, object> oldParameters)
+        {
+            Dictionary<int, object> newParameters = new();
+            foreach (KeyValuePair<byte, object> item in oldParameters)
+            {
+                byte byteValue = item.Key;
+                int result = (int)(byteValue);
+                newParameters.Add(result, item.Value);
+            }
+            return newParameters;
         }
         private void SetOperationCodesToIgnore()
         {
